@@ -56,7 +56,6 @@ function handleImage (rawImage) {
       // draw shadow left-upper
       ctx.shadowOffsetX = 0
       ctx.shadowOffsetY = 0
-      // ctx.shadowBlur = frame.shadow.blur / 2
       ctx.globalAlpha = 0.3
       ctx.fillRect(
         shadowMargin,
@@ -77,13 +76,6 @@ function handleImage (rawImage) {
         canvas.width - (shadowMargin * 2),
         canvas.height - (shadowMargin * 2)
       )
-      /* ctx.lineWidth = 1
-      ctx.strokeRect(
-        shadowMargin,
-        shadowMargin,
-        canvas.width - (shadowMargin * 2),
-        canvas.height - (shadowMargin * 2)
-      ) */
 
       // draw image
       ctx.drawImage(
@@ -96,7 +88,6 @@ function handleImage (rawImage) {
     }
     img.src = event.target.result
   }
-  // reader.readAsDataURL(e.target.files[0])
   reader.readAsDataURL(rawImage)
 }
 
