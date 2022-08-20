@@ -2,7 +2,7 @@
 Generates a polaroid frame around an image.
 
 ## Usage
-- Open index.html in your browser OR open [This](https://hijae.github.io/polaroid-generator-EXIF)
+- Open index.html in your browser OR open [Github page](https://hijae.github.io/polaroid-generator-EXIF)
 - Click on 'Choose image' or drag an image onto the browser window
 - A polaroid frame will appear around your image
 - Right-click on the image and choose 'Save image as...' to save the result
