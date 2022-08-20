@@ -85,7 +85,19 @@ function handleImage (rawImage) {
         newImageWidth,
         newImageHeight
       )
-    }
+      ctx.fillStyle = "black"
+      ctx.font = '17pt sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'hanging'
+      exifr.parse(rawImage)
+      .then(output => 
+        {
+          console.log(output)
+          ctx.fillText(output.Make + " " + output.Model+ " " + output.LensModel, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width * 2) + frame.bottomMargin / 2 - shadowMargin)
+          if(output.ExposureTime>=1) ctx.fillText(output.FocalLength + "mm ƒ/" + output.FNumber  + " " + output.ExposureTime + '" ISO ' + output.ISO, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width * 2) + frame.bottomMargin / 2 + shadowMargin)
+          else ctx.fillText(output.FocalLength + "mm ƒ/" + output.FNumber  + " 1/" + 1/output.ExposureTime + " ISO " + output.ISO, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width * 2) + frame.bottomMargin / 2 + shadowMargin)
+        })
+    } 
     img.src = event.target.result
   }
   reader.readAsDataURL(rawImage)

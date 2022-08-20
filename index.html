@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Polaroid Generator</title>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/exifr/dist/lite.umd.js"></script>
 </head>
 <body>
   <div class="canvasWrapper">
     <div class="imageUploadForm_wrapper">
       <span>Choose image</span>
-      <input type="file" id="imageLoader" name="imageLoader" class="imageUploadForm" />
+      <input type="file" id="imageLoader" name="imageLoader" class="imageUploadForm" accept="image/*"/>
     </div>
     <canvas id="imageCanvas"></canvas>
   </div>
