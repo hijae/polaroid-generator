@@ -12,7 +12,4 @@ Generates a polaroid frame around an image.
 
 
 ## Dependencies
-There are no external dependencies. All code is written in regular JS. This tool can be used offline too.
-
-## Using
 [MikeKovarik/exifr](https://github.com/MikeKovarik/exifr)
