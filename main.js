@@ -86,7 +86,7 @@ function handleImage (rawImage) {
         newImageHeight
       )
       ctx.fillStyle = "black"
-      ctx.font = '250% sans-serif'
+      ctx.font = '200% sans-serif'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'hanging'
       exifr.parse(rawImage)
