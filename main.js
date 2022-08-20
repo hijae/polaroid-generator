@@ -5,10 +5,10 @@ imageLoader.addEventListener('change', (e) => {
 var canvas = document.getElementById('imageCanvas')
 var ctx = canvas.getContext('2d')
 // new image size (resize)
-const newImageWidth = 500
+const newImageWidth = 1000
 // polaroid frame settings
 const frame = {
-  width: 20,
+  width: 40,
   bottomMargin: 130,
   color: 'white',
   shadow: {
@@ -86,7 +86,7 @@ function handleImage (rawImage) {
         newImageHeight
       )
       ctx.fillStyle = "black"
-      ctx.font = '17pt sans-serif'
+      ctx.font = '250% sans-serif'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'hanging'
       exifr.parse(rawImage)
@@ -97,7 +97,7 @@ function handleImage (rawImage) {
           if(output.ExposureTime>=1) ctx.fillText(output.FocalLength + "mm ƒ/" + output.FNumber  + " " + output.ExposureTime + '" ISO ' + output.ISO, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width * 2) + frame.bottomMargin / 2 + shadowMargin)
           else ctx.fillText(output.FocalLength + "mm ƒ/" + output.FNumber  + " 1/" + 1/output.ExposureTime + " ISO " + output.ISO, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width * 2) + frame.bottomMargin / 2 + shadowMargin)
         })
-    } 
+    }
     img.src = event.target.result
   }
   reader.readAsDataURL(rawImage)
