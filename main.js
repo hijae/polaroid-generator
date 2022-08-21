@@ -86,7 +86,7 @@ function handleImage (rawImage) {
         newImageHeight
       )
       ctx.fillStyle = "black"
-      ctx.font = '200% "Nanum Pen Script"'
+      ctx.font = '200% "Shadows Into Light"'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'hanging'
       exifr.parse(rawImage)
