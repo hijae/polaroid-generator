@@ -4,28 +4,28 @@ imageLoader.addEventListener('change', (e) => {
 }, false)
 var canvas = document.getElementById('imageCanvas')
 var ctx = canvas.getContext('2d')
-// new image size (resize)
-const newImageWidth = 4000
-// polaroid frame settings
-const frame = {
-  width: 100,
-  bottomMargin: 300,
-  color: 'white',
-  shadow: {
-    color: '#c1c1c1',
-    blur: 15,
-    offset: 10
-  }
-}
+
 
 function handleImage (rawImage) {
   var reader = new FileReader()
   reader.onload = function (event) {
     var img = new Image()
     img.onload = function () {
+      // polaroid frame settings
+      const frame = {
+        width: img.width / 30,
+        bottomMargin: img.height / 10,
+        color: 'white',
+        shadow: {
+          color: '#c1c1c1',
+          blur: img.width / 100,
+          offset: img.width / 100
+        }
+      }
       // calculate shadow margin
       const shadowMargin = frame.shadow.offset * 2
-
+      // new image size (resize)
+      const newImageWidth = img.width
       // calculate new image size
       const ratio = newImageWidth / img.width
       const newImageHeight = img.height * ratio
@@ -86,16 +86,18 @@ function handleImage (rawImage) {
         newImageHeight
       )
       ctx.fillStyle = "black"
-      ctx.font = '750% "Shadows Into Light"'
+      // ctx.font = '750% "Shadows Into Light"'
+      // font size is calculated based on the image width
+      ctx.font = (newImageWidth / 30) + 'px "Shadows Into Light"'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'hanging'
       exifr.parse(rawImage)
       .then(output => 
         {
           console.log(output)
-          ctx.fillText(output.Make + " " + output.Model+ " " + output.LensModel, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + (frame.bottomMargin / 2) - shadowMargin + frame.width / 2)
-          if(output.ExposureTime>=1) ctx.fillText(output.FocalLength + "mm f/" + output.FNumber  + " " + output.ExposureTime + '" ISO ' + output.ISO, (newImageWidth + (frame.width) + (shadowMargin * 2)) / 2, newImageHeight + frame.width + frame.bottomMargin / 2 + shadowMargin+frame.width/2)
-          else ctx.fillText(output.FocalLength + "mm f/" + output.FNumber  + " 1/" + parseInt(1/output.ExposureTime) + " ISO " + output.ISO, (newImageWidth + (frame.width) + (shadowMargin * 2)) / 2, newImageHeight + (frame.width) + frame.bottomMargin / 2 + shadowMargin+frame.width/2)
+          ctx.fillText(output.Make + " " + output.Model+ " " + output.LensModel, (newImageWidth + (frame.width * 2) + (shadowMargin * 2)) / 2, newImageHeight + frame.bottomMargin / 2 + frame.width + shadowMargin-newImageWidth / 35)
+          if(output.ExposureTime>=1) ctx.fillText(output.FocalLength + "mm f/" + output.FNumber  + " " + output.ExposureTime + '" ISO ' + output.ISO, (newImageWidth + (frame.width) + (shadowMargin * 2)) / 2, newImageHeight + frame.bottomMargin / 2 + frame.width + shadowMargin+newImageWidth / 35)
+          else ctx.fillText(output.FocalLength + "mm f/" + output.FNumber  + " 1/" + parseInt(1/output.ExposureTime) + " ISO " + output.ISO, (newImageWidth + (frame.width) + (shadowMargin * 2)) / 2, newImageHeight + frame.bottomMargin / 2 + frame.width + shadowMargin+newImageWidth / 35)
         })
     }
     img.src = event.target.result
